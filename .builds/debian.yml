@@ -1,0 +1,19 @@
+image: debian/testing
+
+packages:
+  - nodejs
+  - npm
+
+sources:
+  - https://git.sr.ht/~klahr/quadrate-vscode
+
+tasks:
+  - build: |
+      cd quadrate-vscode
+      npm install
+      npm run compile
+
+triggers:
+  - action: email
+    condition: failure
+    to: klahr@r8.rs
