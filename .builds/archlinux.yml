@@ -1,7 +1,7 @@
 image: archlinux
 
 secrets:
-  - ea8ca0d9-1859-4db5-bb99-8f12baf60b59
+  - 461a6f42-6635-415f-9533-b7f11adf4779
 
 packages:
   - nodejs
