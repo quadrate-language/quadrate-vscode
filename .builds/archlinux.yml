@@ -1,29 +1,17 @@
 image: archlinux
 
-secrets:
-  - 461a6f42-6635-415f-9533-b7f11adf4779
-
 packages:
   - nodejs
   - npm
 
 sources:
-  - git+ssh://git@git.sr.ht/~klahr/quadrate-vscode
-
-environment:
-  GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
+  - https://git.sr.ht/~klahr/quadrate-vscode
 
 tasks:
   - build: |
       cd quadrate-vscode
       npm install
       npm run compile
-  - mirror-to-github: |
-      cd ~/quadrate-vscode
-      ssh-keyscan github.com >> ~/.ssh/known_hosts
-      git remote add github git@github.com:quadrate-language/quadrate-vscode.git || \
-        git remote set-url github git@github.com:quadrate-language/quadrate-vscode.git
-      git push --mirror github
 
 triggers:
   - action: email
