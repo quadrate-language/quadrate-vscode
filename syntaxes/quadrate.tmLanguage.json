@@ -31,11 +31,15 @@
       "patterns": [
         {
           "name": "keyword.control.quadrate",
-          "match": "\\b(if|else|loop|for|break|continue|defer|return)\\b"
+          "match": "\\b(if|else|while|loop|for|break|continue|defer|return|switch)\\b"
         },
         {
           "name": "keyword.other.quadrate",
-          "match": "\\b(fn|test|use|const|pub|struct|import|as|new|ctx|switch)\\b"
+          "match": "\\b(fn|test|use|const|pub|struct|import|as|ctx)\\b"
+        },
+        {
+          "name": "constant.language.quadrate",
+          "match": "\\b(true|false|Ok|Err)\\b"
         }
       ]
     },
@@ -113,6 +117,10 @@
           "match": "\\b(add|sub|mul|div|mod|neg|inc|dec)\\b"
         },
         {
+          "name": "support.function.bitwise.quadrate",
+          "match": "\\b(and|or|xor|not|shl|shr)\\b"
+        },
+        {
           "name": "support.function.math.quadrate",
           "match": "\\b(abs|sqrt|sq|cb|cbrt|pow|inv|fac|sin|cos|tan|asin|acos|atan|ln|log10|ceil|floor|round|min|max)\\b"
         },
@@ -122,11 +130,11 @@
         },
         {
           "name": "support.function.array.quadrate",
-          "match": "\\b(append|makef|makei|makep|makes|set)\\b"
+          "match": "\\b(make|makef|makei|makep|makes|append|set)\\b"
         },
         {
           "name": "support.function.cast.quadrate",
-          "match": "\\b(castf|casti|casts)\\b"
+          "match": "\\b(cast)\\b"
         },
         {
           "name": "support.function.io.quadrate",
@@ -138,7 +146,7 @@
         },
         {
           "name": "support.function.error.quadrate",
-          "match": "\\b(error)\\b"
+          "match": "\\b(err|panic)\\b"
         }
       ]
     },
