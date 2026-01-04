@@ -134,7 +134,7 @@
         },
         {
           "name": "support.function.cast.quadrate",
-          "match": "\\b(cast)\\b"
+          "match": "\\b(cast|sizeof)\\b"
         },
         {
           "name": "support.function.io.quadrate",
