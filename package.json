@@ -5,6 +5,10 @@
   "version": "0.1.0",
   "publisher": "quadrate",
   "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://git.sr.ht/~klahr/quadrate-vscode"
+  },
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -144,6 +148,26 @@
           "type": "string",
           "default": "quadlint",
           "description": "Path to the quadlint executable"
+        },
+        "quadrate.format.onSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run quadfmt on save"
+        },
+        "quadrate.format.path": {
+          "type": "string",
+          "default": "quadfmt",
+          "description": "Path to the quadfmt executable"
+        },
+        "quadrate.uses.onSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run quaduses on save"
+        },
+        "quadrate.uses.path": {
+          "type": "string",
+          "default": "quaduses",
+          "description": "Path to the quaduses executable"
         }
       }
     }

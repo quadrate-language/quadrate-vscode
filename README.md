@@ -16,6 +16,7 @@ Code - OSS / Visual Studio Code for the [Quadrate](https://git.sr.ht/~klahr/quad
 - **Find References**: Find all usages of a symbol
 - **Rename Symbol**: Scoped renaming of variables and functions
 - **Document Formatting**: Format code on demand
+- **Format on Save**: Automatically run quadfmt and quaduses on save
 - **Hover Documentation**: View function signatures and documentation
 - **Signature Help**: Function signatures while typing
 - **Document Highlight**: Highlight other occurrences of symbol under cursor
@@ -28,6 +29,8 @@ Code - OSS / Visual Studio Code for the [Quadrate](https://git.sr.ht/~klahr/quad
 
 - Node.js and npm
 - `quadlsp` in PATH (for LSP features)
+- `quadfmt` in PATH (for format on save)
+- `quaduses` in PATH (for uses on save)
 
 ---
 
@@ -44,7 +47,7 @@ cd quadrate-vscode
 The install script will:
 1. Install npm dependencies
 2. Compile TypeScript
-3. Copy the extension to your VS Code extensions directory
+3. Package and install the extension
 
 ### Manual Install
 
@@ -70,8 +73,7 @@ ln -s "$(pwd)" ~/.vscode-oss/extensions/quadrate.quadrate-0.1.0
 
 Option B - Package and install:
 ```bash
-npm install -g vsce
-vsce package
+npx @vscode/vsce package --baseContentUrl "https://git.sr.ht/~klahr/quadrate-vscode/blob/master"
 code --install-extension quadrate-0.1.0.vsix
 ```
 
@@ -83,21 +85,24 @@ code --install-extension quadrate-0.1.0.vsix
 
 ### Settings
 
-Add to your VS Code `settings.json`:
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `quadrate.lsp.path` | `"quadlsp"` | Path to the quadlsp executable |
+| `quadrate.lsp.trace` | `"off"` | Trace LSP communication (`off`, `messages`, `verbose`) |
+| `quadrate.lint.enabled` | `true` | Enable quadlint warnings |
+| `quadrate.lint.path` | `"quadlint"` | Path to the quadlint executable |
+| `quadrate.format.onSave` | `true` | Run quadfmt on save |
+| `quadrate.format.path` | `"quadfmt"` | Path to the quadfmt executable |
+| `quadrate.uses.onSave` | `true` | Run quaduses on save |
+| `quadrate.uses.path` | `"quaduses"` | Path to the quaduses executable |
+
+### Example Configuration
 
 ```json
 {
-  "quadrate.lsp.path": "quadlsp",
-  "quadrate.lint.enabled": true,
-  "quadrate.lint.path": "quadlint"
-}
-```
-
-### Using a Local Build
-
-```json
-{
-  "quadrate.lsp.path": "/path/to/quadrate/build/debug/cmd/quadlsp/quadlsp"
+  "quadrate.lsp.path": "/path/to/quadlsp",
+  "quadrate.format.onSave": true,
+  "quadrate.uses.onSave": true
 }
 ```
 
@@ -209,8 +214,7 @@ npm run watch
 ### Packaging
 
 ```bash
-npm install -g vsce
-vsce package
+npx @vscode/vsce package --baseContentUrl "https://git.sr.ht/~klahr/quadrate-vscode/blob/master"
 ```
 
 ---

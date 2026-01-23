@@ -39,48 +39,31 @@ echo "Compiling TypeScript..."
 npm run compile
 
 # Detect VSCode/VSCodium
-VSCODE_EXT_DIR=""
-if [ -d "$HOME/.vscode/extensions" ]; then
-    VSCODE_EXT_DIR="$HOME/.vscode/extensions"
+CODE_CMD=""
+if command -v code &> /dev/null; then
+    CODE_CMD="code"
     EDITOR_NAME="VSCode"
-elif [ -d "$HOME/.vscode-oss/extensions" ]; then
-    VSCODE_EXT_DIR="$HOME/.vscode-oss/extensions"
+elif command -v codium &> /dev/null; then
+    CODE_CMD="codium"
     EDITOR_NAME="VSCodium"
 else
     echo ""
-    echo "Error: Could not find VSCode or VSCodium extensions directory"
-    echo "Expected one of:"
-    echo "  ~/.vscode/extensions"
-    echo "  ~/.vscode-oss/extensions"
-    echo ""
-    echo "Is VSCode/VSCodium installed?"
+    echo "Error: Could not find 'code' or 'codium' command"
+    echo "Is VSCode/VSCodium installed and in PATH?"
     exit 1
 fi
 
+# Package extension
+echo "Packaging extension..."
+npx @vscode/vsce package --baseContentUrl "https://git.sr.ht/~klahr/quadrate-vscode/blob/master" -o quadrate.vsix
+
 # Install extension
-EXT_NAME="quadrate.quadrate-0.1.0"
-TARGET_DIR="$VSCODE_EXT_DIR/$EXT_NAME"
-
-if [ -d "$TARGET_DIR" ] || [ -L "$TARGET_DIR" ]; then
-    echo ""
-    echo "Extension already installed at: $TARGET_DIR"
-    read -p "Reinstall? (y/n) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        rm -rf "$TARGET_DIR"
-    else
-        echo "Keeping existing installation"
-        exit 0
-    fi
-fi
-
 echo ""
 echo "Installing extension to $EDITOR_NAME..."
-mkdir -p "$TARGET_DIR"
-cp -r package.json language-configuration.json out syntaxes node_modules "$TARGET_DIR/"
-if [ -f icon.png ]; then
-    cp icon.png "$TARGET_DIR/"
-fi
+$CODE_CMD --install-extension quadrate.vsix --force
+
+# Clean up
+rm -f quadrate.vsix
 
 echo ""
 echo "==================================="
@@ -89,7 +72,5 @@ echo "==================================="
 echo ""
 echo "Next steps:"
 echo "1. Reload $EDITOR_NAME (Ctrl+Shift+P → 'Developer: Reload Window')"
-echo "2. Open a .qd file or the test-example.qd file"
+echo "2. Open a .qd file"
 echo "3. Verify syntax highlighting and LSP features work"
-echo ""
-echo "For troubleshooting, see: $SCRIPT_DIR/README.md"

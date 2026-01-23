@@ -1,5 +1,6 @@
 import * as path from 'path';
-import { workspace, ExtensionContext, tasks, Task, TaskDefinition, ShellExecution, TaskScope, TaskProvider, debug, DebugConfigurationProvider, WorkspaceFolder, DebugConfiguration, CancellationToken, ProviderResult } from 'vscode';
+import { execFile } from 'child_process';
+import { workspace, ExtensionContext, tasks, Task, TaskDefinition, ShellExecution, TaskScope, TaskProvider, debug, DebugConfigurationProvider, WorkspaceFolder, DebugConfiguration, CancellationToken, ProviderResult, TextDocument, window } from 'vscode';
 import {
   LanguageClient,
   LanguageClientOptions,
@@ -141,6 +142,43 @@ export function activate(context: ExtensionContext) {
   // Register debug configuration provider
   const debugProvider = debug.registerDebugConfigurationProvider('quadrate', new QuadrateDebugConfigProvider());
   context.subscriptions.push(debugProvider);
+
+  // Run quadfmt and quaduses on save
+  context.subscriptions.push(
+    workspace.onDidSaveTextDocument((document: TextDocument) => {
+      if (document.languageId !== 'quadrate') {
+        return;
+      }
+
+      const config = workspace.getConfiguration('quadrate');
+      const filePath = document.uri.fsPath;
+      const formatEnabled = config.get<boolean>('format.onSave');
+      const usesEnabled = config.get<boolean>('uses.onSave');
+
+      const runUses = () => {
+        if (usesEnabled) {
+          const quadusesPath = config.get<string>('uses.path', 'quaduses');
+          execFile(quadusesPath, ['-w', filePath], (error, stdout, stderr) => {
+            if (error) {
+              window.showErrorMessage(`quaduses failed: ${stderr || error.message}`);
+            }
+          });
+        }
+      };
+
+      if (formatEnabled) {
+        const quadfmtPath = config.get<string>('format.path', 'quadfmt');
+        execFile(quadfmtPath, ['-w', filePath], (error, stdout, stderr) => {
+          if (error) {
+            window.showErrorMessage(`quadfmt failed: ${stderr || error.message}`);
+          }
+          runUses();
+        });
+      } else {
+        runUses();
+      }
+    })
+  );
 }
 
 export function deactivate(): Thenable<void> | undefined {
