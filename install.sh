@@ -57,17 +57,17 @@ else
     exit 1
 fi
 
-# Install extension via symlink
-EXT_NAME="quadrate-0.1.0"
+# Install extension
+EXT_NAME="quadrate.quadrate-0.1.0"
 TARGET_DIR="$VSCODE_EXT_DIR/$EXT_NAME"
 
-if [ -L "$TARGET_DIR" ]; then
+if [ -d "$TARGET_DIR" ] || [ -L "$TARGET_DIR" ]; then
     echo ""
     echo "Extension already installed at: $TARGET_DIR"
     read -p "Reinstall? (y/n) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        rm "$TARGET_DIR"
+        rm -rf "$TARGET_DIR"
     else
         echo "Keeping existing installation"
         exit 0
@@ -76,7 +76,11 @@ fi
 
 echo ""
 echo "Installing extension to $EDITOR_NAME..."
-ln -s "$SCRIPT_DIR" "$TARGET_DIR"
+mkdir -p "$TARGET_DIR"
+cp -r package.json language-configuration.json out syntaxes node_modules "$TARGET_DIR/"
+if [ -f icon.png ]; then
+    cp icon.png "$TARGET_DIR/"
+fi
 
 echo ""
 echo "==================================="

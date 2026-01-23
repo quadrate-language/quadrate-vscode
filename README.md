@@ -26,25 +26,8 @@ Code - OSS / Visual Studio Code for the [Quadrate](https://git.sr.ht/~klahr/quad
 
 ## Prerequisites
 
-### Required
-
-**quadlsp** binary from the Quadrate compiler:
-
-```bash
-git clone https://git.sr.ht/~klahr/quadrate
-cd quadrate
-make release && sudo make install
-```
-
-Or use a local build:
-```bash
-make debug
-# Binary at: build/debug/cmd/quadlsp/quadlsp
-```
-
-### Build Requirements
-
 - Node.js and npm
+- `quadlsp` in PATH (for LSP features)
 
 ---
 
@@ -61,7 +44,7 @@ cd quadrate-vscode
 The install script will:
 1. Install npm dependencies
 2. Compile TypeScript
-3. Symlink the extension to your VS Code extensions directory
+3. Copy the extension to your VS Code extensions directory
 
 ### Manual Install
 
@@ -79,10 +62,10 @@ npm run compile
 Option A - Symlink (recommended for development):
 ```bash
 # For VS Code
-ln -s "$(pwd)" ~/.vscode/extensions/quadrate-0.1.0
+ln -s "$(pwd)" ~/.vscode/extensions/quadrate.quadrate-0.1.0
 
 # For VSCodium
-ln -s "$(pwd)" ~/.vscode-oss/extensions/quadrate-0.1.0
+ln -s "$(pwd)" ~/.vscode-oss/extensions/quadrate.quadrate-0.1.0
 ```
 
 Option B - Package and install:
