@@ -224,7 +224,7 @@ npx @vscode/vsce package --baseContentUrl "https://git.sr.ht/~klahr/quadrate-vsc
 Patches welcome!
 
 **Email**: ~klahr/quadrate@lists.sr.ht
-**GitHub**: https://github.com/quadrate-lang/quadrate-vscode
+**SourceHut**: https://git.sr.ht/~klahr/quadrate-vscode
 
 ---
 
