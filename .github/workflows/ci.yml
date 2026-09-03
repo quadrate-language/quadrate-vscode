@@ -25,3 +25,23 @@ jobs:
       - run: npm ci
 
       - run: npm run compile
+
+  surface:
+    name: Language surface matches the compiler
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check out the compiler
+        uses: actions/checkout@v5
+        with:
+          repository: quadrate-language/quadrate
+          path: .quadrate
+
+      # The syntax definition is a hand-maintained copy of the compiler's builtin
+      # and keyword tables, and nothing here can see those tables. Without this the
+      # copy drifts silently: every removed stack shuffler plus `ctx` and `while`
+      # survived here long after the compiler dropped them.
+      - name: Compare against lib/qc/include/quadrate/qc/instructions.h
+        run: |
+          python3 .quadrate/tools/check_builtin_lists.py --extra syntaxes/quadrate.tmLanguage.json

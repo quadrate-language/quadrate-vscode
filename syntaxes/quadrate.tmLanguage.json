@@ -31,11 +31,11 @@
       "patterns": [
         {
           "name": "keyword.control.quadrate",
-          "match": "\\b(if|else|while|loop|for|break|continue|defer|return|switch)\\b"
+          "match": "\\b(if|else|loop|for|break|continue|defer|return|switch)\\b"
         },
         {
           "name": "keyword.other.quadrate",
-          "match": "\\b(fn|test|use|const|pub|struct|import|as|ctx)\\b"
+          "match": "\\b(fn|test|use|const|pub|struct|import|as|var|packed)\\b"
         },
         {
           "name": "constant.language.quadrate",
@@ -110,7 +110,7 @@
       "patterns": [
         {
           "name": "support.function.stack.quadrate",
-          "match": "\\b(dup|dup2|dupd|swap|swap2|swapd|drop|drop2|over|over2|overd|rot|nip|nipd|tuck|pick|roll|depth|clear|len|nth|free)\\b"
+          "match": "\\b(dup|dup2|swap|drop|over|rot|nip|pick|roll|depth|clear|len|nth|free)\\b"
         },
         {
           "name": "support.function.arithmetic.quadrate",
@@ -118,7 +118,7 @@
         },
         {
           "name": "support.function.bitwise.quadrate",
-          "match": "\\b(and|or|xor|not|shl|shr)\\b"
+          "match": "\\b(and|or|xor|not|lnot|shl|shr)\\b"
         },
         {
           "name": "support.function.math.quadrate",
