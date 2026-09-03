@@ -55,7 +55,7 @@ fi
 
 # Package extension
 echo "Packaging extension..."
-npx @vscode/vsce package --baseContentUrl "https://git.sr.ht/~klahr/quadrate-vscode/blob/master" -o quadrate.vsix
+npx @vscode/vsce package --baseContentUrl "https://github.com/quadrate-language/quadrate-vscode/blob/master" -o quadrate.vsix
 
 # Install extension
 echo ""

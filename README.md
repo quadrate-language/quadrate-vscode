@@ -1,8 +1,8 @@
 # quadrate-vscode
 
-> **Canonical repository:** https://git.sr.ht/~klahr/quadrate-vscode
+> **Canonical repository:** https://github.com/quadrate-language/quadrate-vscode
 
-Code - OSS / Visual Studio Code for the [Quadrate](https://git.sr.ht/~klahr/quadrate) programming language.
+Code - OSS / Visual Studio Code for the [Quadrate](https://github.com/quadrate-language/quadrate) programming language.
 
 ---
 
@@ -39,7 +39,7 @@ Code - OSS / Visual Studio Code for the [Quadrate](https://git.sr.ht/~klahr/quad
 ### Quick Install
 
 ```bash
-git clone https://git.sr.ht/~klahr/quadrate-vscode
+git clone https://github.com/quadrate-language/quadrate-vscode
 cd quadrate-vscode
 ./install.sh
 ```
@@ -54,7 +54,7 @@ The install script will:
 1. **Clone and build:**
 
 ```bash
-git clone https://git.sr.ht/~klahr/quadrate-vscode
+git clone https://github.com/quadrate-language/quadrate-vscode
 cd quadrate-vscode
 npm install
 npm run compile
@@ -73,7 +73,7 @@ ln -s "$(pwd)" ~/.vscode-oss/extensions/quadrate.quadrate-0.1.0
 
 Option B - Package and install:
 ```bash
-npx @vscode/vsce package --baseContentUrl "https://git.sr.ht/~klahr/quadrate-vscode/blob/master"
+npx @vscode/vsce package --baseContentUrl "https://github.com/quadrate-language/quadrate-vscode/blob/master"
 code --install-extension quadrate-0.1.0.vsix
 ```
 
@@ -214,17 +214,17 @@ npm run watch
 ### Packaging
 
 ```bash
-npx @vscode/vsce package --baseContentUrl "https://git.sr.ht/~klahr/quadrate-vscode/blob/master"
+npx @vscode/vsce package --baseContentUrl "https://github.com/quadrate-language/quadrate-vscode/blob/master"
 ```
 
 ---
 
 ## Contributing
 
-Patches welcome!
+Pull requests welcome!
 
-**Email**: ~klahr/quadrate@lists.sr.ht
-**SourceHut**: https://git.sr.ht/~klahr/quadrate-vscode
+**Issues**: https://github.com/quadrate-language/quadrate-vscode/issues
+**GitHub**: https://github.com/quadrate-language/quadrate-vscode
 
 ---
 
@@ -238,6 +238,6 @@ See [LICENSE](./LICENSE) for full terms.
 
 ## Resources
 
-- **Quadrate Language**: https://git.sr.ht/~klahr/quadrate
+- **Quadrate Language**: https://github.com/quadrate-language/quadrate
 - **Documentation**: https://quad.r8.rs
 - **VS Code Extension API**: https://code.visualstudio.com/api
