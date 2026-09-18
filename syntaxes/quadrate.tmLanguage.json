@@ -35,7 +35,7 @@
         },
         {
           "name": "keyword.other.quadrate",
-          "match": "\\b(fn|test|use|const|pub|struct|import|as|var|packed)\\b"
+          "match": "\\b(fn|test|use|const|pub|struct|import|as|var|packed|inline|stack)\\b"
         },
         {
           "name": "constant.language.quadrate",
